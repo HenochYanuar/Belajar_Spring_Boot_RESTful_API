@@ -1,8 +1,10 @@
 package Belajar_Spring_Boot.Spring_Boot_RestFull.service;
 
+import Belajar_Spring_Boot.Spring_Boot_RestFull.entity.User;
 import Belajar_Spring_Boot.Spring_Boot_RestFull.exception.ApiException;
 import Belajar_Spring_Boot.Spring_Boot_RestFull.model.RegisterUserRequest;
 import Belajar_Spring_Boot.Spring_Boot_RestFull.repository.UserRepository;
+import Belajar_Spring_Boot.Spring_Boot_RestFull.security.BCrypt;
 import jakarta.persistence.SecondaryTable;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -33,8 +35,8 @@ public class UserService {
         }
 
         User user = new User();
-        user.setUsername(request.getusername());
-        user.setPassword(Bcrypt.hashpw(request.getPassword(), Bcrypt.gensalt()));
+        user.setUsername(request.getUsername()));
+        user.setPassword(BCrypt.hashpw(request.getPassword(), BCrypt.gensalt()));
         user.setName(request.getName());
 
         userRepository.save(user);
