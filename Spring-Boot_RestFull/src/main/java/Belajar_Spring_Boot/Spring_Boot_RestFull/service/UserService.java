@@ -1,16 +1,16 @@
 package Belajar_Spring_Boot.Spring_Boot_RestFull.service;
 
 import Belajar_Spring_Boot.Spring_Boot_RestFull.entity.User;
-import Belajar_Spring_Boot.Spring_Boot_RestFull.exception.ApiException;
 import Belajar_Spring_Boot.Spring_Boot_RestFull.model.RegisterUserRequest;
 import Belajar_Spring_Boot.Spring_Boot_RestFull.repository.UserRepository;
 import Belajar_Spring_Boot.Spring_Boot_RestFull.security.BCrypt;
-import jakarta.persistence.SecondaryTable;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Set;
 
@@ -31,7 +31,7 @@ public class UserService {
         }
 
         if (userRepository.existsById(request.getUsername())) {
-            throw new ApiException("Username already registerd");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already exist");
         }
 
         User user = new User();
