@@ -35,7 +35,7 @@ public class UserService {
         }
 
         User user = new User();
-        user.setUsername(request.getUsername()));
+        user.setUsername(request.getUsername());
         user.setPassword(BCrypt.hashpw(request.getPassword(), BCrypt.gensalt()));
         user.setName(request.getName());
 
